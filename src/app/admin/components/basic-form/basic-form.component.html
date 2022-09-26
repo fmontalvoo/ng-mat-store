@@ -1,17 +1,23 @@
 <div>
-  <p>Name: {{nameFlied.value}} | valid: {{nameFlied.valid}}</p>
-  <input type="text" [formControl]="nameFlied" />
+  <p>Name: {{nameFlied.value}}</p>
+  <input [class.is-valid]="nameFlied.touched && nameFlied.valid"
+    [class.is-invalid]="nameFlied.touched && nameFlied.invalid" type="text" [formControl]="nameFlied" />
   <!-- <code>
   <pre>{{nameFlied | json}}</pre>
  </code> -->
-  <small *ngIf="nameFlied.touched && nameFlied.hasError('required')">Este campo es requerido</small>
+  <div class="message" [class.active]="nameFlied.touched && nameFlied.invalid">
+    <small *ngIf="nameFlied.touched && nameFlied.hasError('required')">Este campo es requerido</small>
+  </div>
 </div>
 
 <div>
-  <p>Email: {{emailFlied.value}} | valid: {{emailFlied.valid}}</p>
-  <input type="email" [formControl]="emailFlied" />
-  <small *ngIf="emailFlied.touched && emailFlied.hasError('required')">Este campo es requerido</small>
-  <small *ngIf="emailFlied.touched && emailFlied.hasError('email')">El email debe tener un formato valido</small>
+  <p>Email: {{emailFlied.value}}</p>
+  <input [class.is-valid]="emailFlied.touched && emailFlied.valid"
+    [class.is-invalid]="emailFlied.touched && emailFlied.invalid" type="email" [formControl]="emailFlied" />
+  <div class="message" [class.active]="emailFlied.touched && emailFlied.invalid">
+    <small *ngIf="emailFlied.touched && emailFlied.hasError('required')">Este campo es requerido</small>
+    <small *ngIf="emailFlied.touched && emailFlied.hasError('email')">El email debe tener un formato valido</small>
+  </div>
 </div>
 
 <div>
