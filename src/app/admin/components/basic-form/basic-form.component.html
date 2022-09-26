@@ -1,32 +1,75 @@
 <div>
+  <p>Name: {{nameFlied.value}} | valid: {{nameFlied.valid}}</p>
   <input type="text" [formControl]="nameFlied" />
-  <p>Name: {{nameFlied.value}}</p>
   <!-- <code>
   <pre>{{nameFlied | json}}</pre>
  </code> -->
 </div>
 
 <div>
+  <p>Email: {{emailFlied.value}} | valid: {{emailFlied.valid}}</p>
   <input type="email" [formControl]="emailFlied" />
-  <p>Email: {{emailFlied.value}}</p>
 </div>
 
 <div>
-  <input type="tel" [formControl]="phoneFlied" />
   <p>Tel: {{phoneFlied.value}}</p>
+  <input type="tel" [formControl]="phoneFlied" />
 </div>
 
 <div>
-  <input type="color" [formControl]="colorFlied" />
   <p>Color: {{colorFlied.value}}</p>
+  <input type="color" [formControl]="colorFlied" />
 </div>
 
 <div>
-  <input type="date" [formControl]="dateFlied" />
   <p>Date: {{dateFlied.value}}</p>
+  <input type="date" [formControl]="dateFlied" />
 </div>
 
 <div>
-  <input type="number" [formControl]="numberFlied" />
   <p>Number: {{numberFlied.value}}</p>
+  <input type="number" [formControl]="numberFlied" />
+</div>
+
+<div>
+  <p>Category: {{categoryFlied.value}}</p>
+  <select [formControl]="categoryFlied">
+    <option value="1">C#1</option>
+    <option value="2">C#2</option>
+    <option value="3">C#3</option>
+  </select>
+</div>
+
+<div>
+  <p>Tags: {{tagsFlied.value}}</p>
+  <select [formControl]="tagsFlied" multiple>
+    <option value="1">T#1</option>
+    <option value="2">T#2</option>
+    <option value="3">T#3</option>
+    <option value="4">T#4</option>
+    <option value="5">T#5</option>
+    <option value="6">T#6</option>
+    <option value="7">T#7</option>
+  </select>
+</div>
+
+<div>
+  <p>Agree: {{agreeFlied.value}}</p>
+  <input type="checkbox" [formControl]="agreeFlied" />
+</div>
+
+<div>
+  <p>Gender: {{genderFlied.value}}</p>
+  <label>
+    Male
+    <input name="gender" type="radio" value="M" [formControl]="genderFlied" />
+  </label>
+  <label>
+    Female
+    <input name="gender" type="radio" value="F" [formControl]="genderFlied" />
+  </label>
+  <label>
+    Other
+    <input name="gender" type="radio" value="O" [formControl]="genderFlied" />
+  </label>
 </div>
