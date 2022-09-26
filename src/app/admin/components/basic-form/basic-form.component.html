@@ -4,11 +4,14 @@
   <!-- <code>
   <pre>{{nameFlied | json}}</pre>
  </code> -->
+  <small *ngIf="nameFlied.touched && nameFlied.hasError('required')">Este campo es requerido</small>
 </div>
 
 <div>
   <p>Email: {{emailFlied.value}} | valid: {{emailFlied.valid}}</p>
   <input type="email" [formControl]="emailFlied" />
+  <small *ngIf="emailFlied.touched && emailFlied.hasError('required')">Este campo es requerido</small>
+  <small *ngIf="emailFlied.touched && emailFlied.hasError('email')">El email debe tener un formato valido</small>
 </div>
 
 <div>
