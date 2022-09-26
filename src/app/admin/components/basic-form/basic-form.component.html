@@ -1,7 +1,32 @@
 <div>
   <input type="text" [formControl]="nameFlied" />
-  <p>{{nameFlied.value}}</p>
+  <p>Name: {{nameFlied.value}}</p>
   <!-- <code>
   <pre>{{nameFlied | json}}</pre>
  </code> -->
+</div>
+
+<div>
+  <input type="email" [formControl]="emailFlied" />
+  <p>Email: {{emailFlied.value}}</p>
+</div>
+
+<div>
+  <input type="tel" [formControl]="phoneFlied" />
+  <p>Tel: {{phoneFlied.value}}</p>
+</div>
+
+<div>
+  <input type="color" [formControl]="colorFlied" />
+  <p>Color: {{colorFlied.value}}</p>
+</div>
+
+<div>
+  <input type="date" [formControl]="dateFlied" />
+  <p>Date: {{dateFlied.value}}</p>
+</div>
+
+<div>
+  <input type="number" [formControl]="numberFlied" />
+  <p>Number: {{numberFlied.value}}</p>
 </div>
