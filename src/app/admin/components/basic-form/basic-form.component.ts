@@ -39,7 +39,10 @@ export class BasicFormComponent implements OnInit {
 
   private buildForm() {
     this.form = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]],
+      fullName: this.fb.group({
+        name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]],
+        lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]]
+      }),
       email: ['', [Validators.required, Validators.email]],
       phone: [''],
       color: ['#40CFFF'],
@@ -59,7 +62,7 @@ export class BasicFormComponent implements OnInit {
     }
 
     const {
-      name,
+      fullName,
       email,
       phone,
       color,
@@ -71,11 +74,17 @@ export class BasicFormComponent implements OnInit {
       gender,
     } = this.form.getRawValue();
 
-    console.log(name, email, phone, color, date, number, category, tags, agree, gender);
+    console.info(fullName, email, phone, color, date, number, category, tags, agree, gender);
   }
 
   get name() {
-    return this.form.get('name');
+    return this.form.get('fullName.name');
+    // return this.form.get('fullName').get('name');
+  }
+
+  get lastName() {
+    return this.form.get('fullName.lastName');
+    // return this.form.get('fullName').get('lastName');
   }
 
   get email() {

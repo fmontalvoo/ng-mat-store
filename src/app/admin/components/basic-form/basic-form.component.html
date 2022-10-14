@@ -1,13 +1,28 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <div>
-    <p>Name: {{name.value}}</p>
-    <input [class.is-valid]="name.touched && name.valid" [class.is-invalid]="name.touched && name.invalid" type="text"
-      formControlName="name" />
-    <div class="message" [class.active]="name.touched && name.invalid">
-      <small *ngIf="name.touched && name.hasError('required')">El nombre es requerido</small>
-      <small *ngIf="name.touched && name.hasError('pattern')">El nombre solo debe contener letras</small>
+
+  <div formGroupName="fullName">
+    <div>
+      <p>Name: {{name.value}}</p>
+      <input [class.is-valid]="name.touched && name.valid" [class.is-invalid]="name.touched && name.invalid" type="text"
+        formControlName="name" />
+      <div class="message" [class.active]="name.touched && name.invalid">
+        <small *ngIf="name.touched && name.hasError('required')">El nombre es requerido</small>
+        <small *ngIf="name.touched && name.hasError('pattern')">El nombre solo debe contener letras</small>
+      </div>
     </div>
+
+    <div>
+      <p>Last name: {{lastName.value}}</p>
+      <input [class.is-valid]="lastName.touched && lastName.valid"
+        [class.is-invalid]="lastName.touched && lastName.invalid" type="text" formControlName="lastName" />
+      <div class="message" [class.active]="lastName.touched && lastName.invalid">
+        <small *ngIf="lastName.touched && lastName.hasError('required')">El nombre es requerido</small>
+        <small *ngIf="lastName.touched && lastName.hasError('pattern')">El nombre solo debe contener letras</small>
+      </div>
+    </div>
+
   </div>
+
 
   <div>
     <p>Email: {{email.value}}</p>
