@@ -8,7 +8,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class BasicFormComponent implements OnInit {
 
-  // nameFlied = new FormControl('', Validators.required);
+  nameFlied = new FormControl('', Validators.required);
   // emailFlied = new FormControl('', [Validators.required, Validators.email]);
   // phoneFlied = new FormControl('');
   // colorFlied = new FormControl('#40CFFF');
@@ -30,15 +30,16 @@ export class BasicFormComponent implements OnInit {
       .subscribe(value => {
         console.info(value);
       });
-    // this.nameFlied.valueChanges
-    //   .subscribe(value => {
-    //     console.info(value);
-    //   });
+
+    this.nameFlied.valueChanges
+      .subscribe(value => {
+        console.info(value);
+      });
   }
 
   private buildForm() {
     this.form = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]],
       email: ['', [Validators.required, Validators.email]],
       phone: [''],
       color: ['#40CFFF'],
@@ -46,7 +47,7 @@ export class BasicFormComponent implements OnInit {
       number: [0],
       category: [''],
       tags: [''],
-      agree: [false],
+      agree: [false, Validators.requiredTrue],
       gender: [''],
     });
   }

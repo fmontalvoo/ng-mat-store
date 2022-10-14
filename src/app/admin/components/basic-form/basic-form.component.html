@@ -4,7 +4,8 @@
     <input [class.is-valid]="name.touched && name.valid" [class.is-invalid]="name.touched && name.invalid" type="text"
       formControlName="name" />
     <div class="message" [class.active]="name.touched && name.invalid">
-      <small *ngIf="name.touched && name.hasError('required')">Este campo es requerido</small>
+      <small *ngIf="name.touched && name.hasError('required')">El nombre es requerido</small>
+      <small *ngIf="name.touched && name.hasError('pattern')">El nombre solo debe contener letras</small>
     </div>
   </div>
 
@@ -63,6 +64,9 @@
   <div>
     <p>Agree: {{agree.value}}</p>
     <input type="checkbox" formControlName="agree" />
+    <div class="message" [class.active]="agree.touched && agree.invalid">
+      <small *ngIf="agree.touched && agree.hasError('required')">Debe aceptar los terminos y condiciones.</small>
+    </div>
   </div>
 
   <div>
