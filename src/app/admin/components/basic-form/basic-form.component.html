@@ -1,10 +1,99 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div>
+    <p>Name: {{name.value}}</p>
+    <input [class.is-valid]="name.touched && name.valid" [class.is-invalid]="name.touched && name.invalid" type="text"
+      formControlName="name" />
+    <div class="message" [class.active]="name.touched && name.invalid">
+      <small *ngIf="name.touched && name.hasError('required')">Este campo es requerido</small>
+    </div>
+  </div>
+
+  <div>
+    <p>Email: {{email.value}}</p>
+    <input [class.is-valid]="email.touched && email.valid" [class.is-invalid]="email.touched && email.invalid"
+      type="email" formControlName="email" />
+    <div class="message" [class.active]="email.touched && email.invalid">
+      <small *ngIf="email.touched && email.hasError('required')">Este campo es requerido</small>
+      <small *ngIf="email.touched && email.hasError('email')">El email debe tener un formato valido</small>
+    </div>
+  </div>
+
+  <div>
+    <p>Tel: {{phone.value}}</p>
+    <input type="tel" formControlName="phone" />
+  </div>
+
+  <div>
+    <p>Color: {{color.value}}</p>
+    <input type="color" formControlName="color" />
+  </div>
+
+  <div>
+    <p>Date: {{date.value}}</p>
+    <input type="date" formControlName="date" />
+  </div>
+
+  <div>
+    <p>Number: {{number.value}}</p>
+    <input type="number" formControlName="number" />
+  </div>
+
+  <div>
+    <p>Category: {{category.value}}</p>
+    <select formControlName="category">
+      <option value="1">C#1</option>
+      <option value="2">C#2</option>
+      <option value="3">C#3</option>
+    </select>
+  </div>
+
+  <div>
+    <p>Tags: {{tags.value}}</p>
+    <select formControlName="tags" multiple>
+      <option value="1">T#1</option>
+      <option value="2">T#2</option>
+      <option value="3">T#3</option>
+      <option value="4">T#4</option>
+      <option value="5">T#5</option>
+      <option value="6">T#6</option>
+      <option value="7">T#7</option>
+    </select>
+  </div>
+
+  <div>
+    <p>Agree: {{agree.value}}</p>
+    <input type="checkbox" formControlName="agree" />
+  </div>
+
+  <div>
+    <p>Gender: {{gender.value}}</p>
+    <label>
+      Male
+      <input name="gender" type="radio" value="M" formControlName="gender" />
+    </label>
+    <label>
+      Female
+      <input name="gender" type="radio" value="F" formControlName="gender" />
+    </label>
+    <label>
+      Other
+      <input name="gender" type="radio" value="O" formControlName="gender" />
+    </label>
+  </div>
+
+  <div>
+    <button type="submit">Enviar</button>
+  </div>
+
+</form>
+<!--
 <div>
   <p>Name: {{nameFlied.value}}</p>
   <input [class.is-valid]="nameFlied.touched && nameFlied.valid"
     [class.is-invalid]="nameFlied.touched && nameFlied.invalid" type="text" [formControl]="nameFlied" />
-  <!-- <code>
+  <code>
   <pre>{{nameFlied | json}}</pre>
- </code> -->
+ </code>
   <div class="message" [class.active]="nameFlied.touched && nameFlied.invalid">
     <small *ngIf="nameFlied.touched && nameFlied.hasError('required')">Este campo es requerido</small>
   </div>
@@ -82,3 +171,4 @@
     <input name="gender" type="radio" value="O" [formControl]="genderFlied" />
   </label>
 </div>
+-->
