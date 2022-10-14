@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-basic-form',
@@ -19,26 +19,36 @@ export class BasicFormComponent implements OnInit {
   // agreeFlied = new FormControl(false);
   // genderFlied = new FormControl('');
 
-  form = new FormGroup({
-    name: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl(''),
-    color: new FormControl('#40CFFF'),
-    date: new FormControl(''),
-    number: new FormControl(0),
-    category: new FormControl(''),
-    tags: new FormControl(''),
-    agree: new FormControl(false),
-    gender: new FormControl(''),
-  });
+  form: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) {
+    this.buildForm();
+  }
 
   ngOnInit(): void {
+    this.form.valueChanges
+      .subscribe(value => {
+        console.info(value);
+      });
     // this.nameFlied.valueChanges
     //   .subscribe(value => {
-    //     console.log(value);
+    //     console.info(value);
     //   });
+  }
+
+  private buildForm() {
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: [''],
+      color: ['#40CFFF'],
+      date: [''],
+      number: [0],
+      category: [''],
+      tags: [''],
+      agree: [false],
+      gender: [''],
+    });
   }
 
   submit() {
