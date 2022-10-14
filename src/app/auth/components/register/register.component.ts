@@ -42,9 +42,26 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6), MyValidators.isPasswordValid]],
       confirmPassword: ['', [Validators.required]],
+      type: ['company', [Validators.required]],
+      companyName: ['', [Validators.required]],
     }, {
       validators: MyValidators.matchPasswords,
     });
+    this.type.valueChanges
+      .subscribe(value => {
+        if (value === 'company')
+          this.companyName.setValidators([Validators.required]);
+        else
+          this.companyName.setValidators(null);
+
+        this.companyName.updateValueAndValidity();
+      });
   }
 
+  get type() {
+    return this.form.get('type');
+  }
+  get companyName() {
+    return this.form.get('companyName');
+  }
 }
