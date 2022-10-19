@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CategoriesService {
 
-  private url: string = environment.url_api;
+  private url: string = `${environment.url_api}/categories`;
 
   constructor(private http: HttpClient) { }
 
