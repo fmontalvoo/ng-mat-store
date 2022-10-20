@@ -1,12 +1,12 @@
 import { Category } from "./category.model";
 
 export interface Product {
+  id?: number;
   title: string;
   price: number;
   description: string;
   images: string[];
   category?: Category;
-  id: number;
 }
 
 // Converts JSON strings to/from your types
