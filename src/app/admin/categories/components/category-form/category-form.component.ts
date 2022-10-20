@@ -1,13 +1,13 @@
-import { ActivatedRoute, Params } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { finalize, map } from 'rxjs/operators';
 
-import { CreateCategory } from 'src/app/core/models/category.model';
+import { CategoriesService } from '@core/services/categories.service';
 
-import { CategoriesService } from 'src/app/core/services/categories.service';
+import { Category, CreateCategory } from 'src/app/core/models/category.model';
+
 import { MyValidators } from 'src/app/utils/validators';
 
 @Component({
@@ -18,12 +18,22 @@ import { MyValidators } from 'src/app/utils/validators';
 export class CategoryFormComponent implements OnInit {
 
   progress = 0;
-  categoryId = 0;
   form: FormGroup;
+  edit = false;
   showProgressBar = false;
 
+  @Input() set category(data: Category) {
+    if (data) {
+      this.edit = true;
+      this.form.patchValue(data);
+    }
+
+  }
+
+  @Output() create = new EventEmitter<CreateCategory>();
+  @Output() update = new EventEmitter<CreateCategory>();
+
   constructor(
-    private route: ActivatedRoute,
     private fb: FormBuilder,
     private cs: CategoriesService,
     private storage: AngularFireStorage,
@@ -32,12 +42,7 @@ export class CategoryFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params
-      .subscribe((params: Params) => {
-        this.categoryId = +params['id'];
-        if (this.categoryId)
-          this.getCategory();
-      });
+
   }
 
   private buildForm() {
@@ -55,24 +60,13 @@ export class CategoryFormComponent implements OnInit {
 
     const { name, image } = this.form.getRawValue();
 
-    if (this.categoryId)
-      this.cs.updateCategory(this.categoryId, <CreateCategory>{ name, image })
-        .subscribe(res => {
-          console.info(res);
-        });
+    if (this.edit)
+      this.update.emit(<CreateCategory>{ name, image });
     else
-      this.cs.createCategory(<CreateCategory>{ name, image })
-        .subscribe(res => {
-          console.info(res);
-        });
+      this.create.emit(<CreateCategory>{ name, image });
+
   }
 
-  private getCategory() {
-    this.cs.getCategory(this.categoryId)
-      .subscribe(cat => {
-        this.form.patchValue(cat);
-      });
-  }
 
   uploadFile(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.item(0);
