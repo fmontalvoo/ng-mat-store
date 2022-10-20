@@ -8,6 +8,7 @@ export interface Category {
   id: number;
   name: string;
   image: string;
+  keyLoremSpace?: string;
 }
 
 export type CreateCategory = Omit<Category, 'id'>;
