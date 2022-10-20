@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Category, CreateCategory, UpdateCategory } from '../models/category.model';
 
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,18 @@ export class CategoriesService {
   }
 
   getAllCategories() {
-    return this.http.get<Category[]>(`${this.url}/categories`);
+    return this.http.get<Category[]>(`${this.url}`);
+  }
+
+  checkCategory(name: string) {
+    return this.getAllCategories()
+      .pipe(
+        map(categories => {
+          const found = categories.find(cat => cat.name.toLowerCase() === name.toLowerCase())
+          return !Boolean(found);
+        })
+      )
+
   }
 
 }

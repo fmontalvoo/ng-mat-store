@@ -8,6 +8,7 @@ import { finalize, map } from 'rxjs/operators';
 import { CreateCategory } from 'src/app/core/models/category.model';
 
 import { CategoriesService } from 'src/app/core/services/categories.service';
+import { MyValidators } from 'src/app/utils/validators';
 
 @Component({
   selector: 'app-category-form',
@@ -34,7 +35,7 @@ export class CategoryFormComponent implements OnInit {
 
   private buildForm() {
     this.form = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(3)], MyValidators.validateCategory(this.cs)],
       image: ['', Validators.required],
     })
   }

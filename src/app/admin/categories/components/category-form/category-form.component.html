@@ -13,6 +13,12 @@
               <mat-error *ngIf="name.hasError('required')">
                 Este campo es requerido
               </mat-error>
+              <mat-error *ngIf="name.hasError('minlength')">
+                Debe tener al menos 3 caracteres
+              </mat-error>
+              <mat-error *ngIf="name.hasError('not_available')">
+                El nombre que escogio no esta disponible
+              </mat-error>
             </div>
           </mat-form-field>
         </div>
