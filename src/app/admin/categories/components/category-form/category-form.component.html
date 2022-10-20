@@ -25,6 +25,8 @@
       </div>
       <div class="row">
         <div class="col-xs">
+          <img *ngIf="image.value" [src]="image.value" width="256px">
+          <br>
           <mat-label>Image</mat-label>
           <input (change)="uploadFile($event)" placeholder="Image" type="file">
           <div class="messages" *ngIf="image.touched && image.invalid">
@@ -34,9 +36,6 @@
           </div>
           <mat-progress-bar *ngIf="showProgressBar" mode="determinate" [value]="progress">
           </mat-progress-bar>
-        </div>
-        <div class="col-xs">
-          <img *ngIf="image.value" [src]="image.value" width="256px">
         </div>
       </div>
     </mat-card-content>

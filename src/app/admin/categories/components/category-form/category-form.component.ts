@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -18,11 +18,12 @@ import { MyValidators } from 'src/app/utils/validators';
 export class CategoryFormComponent implements OnInit {
 
   progress = 0;
+  categoryId = 0;
   form: FormGroup;
   showProgressBar = false;
 
   constructor(
-    private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private cs: CategoriesService,
     private storage: AngularFireStorage,
@@ -31,6 +32,12 @@ export class CategoryFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.params
+      .subscribe((params: Params) => {
+        this.categoryId = +params['id'];
+        if (this.categoryId)
+          this.getCategory();
+      });
   }
 
   private buildForm() {
@@ -48,9 +55,22 @@ export class CategoryFormComponent implements OnInit {
 
     const { name, image } = this.form.getRawValue();
 
-    this.cs.createCategory(<CreateCategory>{ name, image })
-      .subscribe(res => {
-        console.info(res);
+    if (this.categoryId)
+      this.cs.updateCategory(this.categoryId, <CreateCategory>{ name, image })
+        .subscribe(res => {
+          console.info(res);
+        });
+    else
+      this.cs.createCategory(<CreateCategory>{ name, image })
+        .subscribe(res => {
+          console.info(res);
+        });
+  }
+
+  private getCategory() {
+    this.cs.getCategory(this.categoryId)
+      .subscribe(cat => {
+        this.form.patchValue(cat);
       });
   }
 
