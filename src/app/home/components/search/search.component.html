@@ -1,0 +1,9 @@
+<div>
+  <input type="search" [formControl]="search">
+</div>
+
+<div class="image-grid">
+  <div class="image" *ngFor="let result of results">
+    <img [src]="result.url">
+  </div>
+</div>
