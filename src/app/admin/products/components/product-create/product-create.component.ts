@@ -30,6 +30,8 @@ export class ProductCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.form.get('stock').valueChanges
+      .subscribe(stock => console.info(stock));
   }
 
   saveProduct(event: Event) {
@@ -70,6 +72,7 @@ export class ProductCreateComponent implements OnInit {
       price: ['', [Validators.required, MyValidators.isPriceValid]],
       image: [''],
       category_id: [''],
+      stock: [5, [Validators.required]],
       description: ['', [Validators.required, Validators.minLength(10)]],
     });
   }
